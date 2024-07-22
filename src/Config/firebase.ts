@@ -1,6 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
+import { getFirestore } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore"; 
+
 
 
 const firebaseConfig = {
@@ -14,11 +17,15 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 
-export const register = (email:any, password:any) => {
-  return createUserWithEmailAndPassword(auth, email, password)
- 
+
+export const register = async(userInfo:any) => {
+  const {fullName, email, password} = userInfo
+  await createUserWithEmailAndPassword(auth, email, password)
+  const users = {fullName, email}
+ return addDoc(collection(db, "users"), {users});
 
 }
 

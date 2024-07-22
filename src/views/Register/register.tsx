@@ -12,7 +12,7 @@ function Register() {
     const [password, setPassword] = useState<any>()
 
     const registerUser = () => {
-      register(email, password)
+      register({email, password, fullName})
       .then((userCredential) => {
         toast.success("Account created Successfully!");
         navigate('/')
