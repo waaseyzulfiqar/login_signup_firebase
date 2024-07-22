@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-  const [products, setProducts] = useState<any>([]);
 
   const navigate = useNavigate();
 

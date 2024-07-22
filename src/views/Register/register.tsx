@@ -11,17 +11,15 @@ function Register() {
     const [email, setEmail] = useState<any>()
     const [password, setPassword] = useState<any>()
 
-    const registerUser = () => {
-      register({email, password, fullName})
-      .then((userCredential) => {
+    const registerUser = async() => {
+      try{
+        await register({email, password, fullName})
         toast.success("Account created Successfully!");
         navigate('/')
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+      }catch(e:any){
         toast.warning("Something went wrong!");
-      });
+      };
+      
     }
 
   return (

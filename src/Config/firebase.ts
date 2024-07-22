@@ -3,7 +3,7 @@ import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } fr
 import { toast } from "react-toastify";
 import { getFirestore } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore"; 
-
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 
 const firebaseConfig = {
@@ -18,6 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 
 
@@ -31,6 +32,17 @@ export const register = async(userInfo:any) => {
 
 export const login = (email:any, password:any) => {
    return signInWithEmailAndPassword(auth, email, password)
-  
+}
 
+export const addProduct = async(productInfo:any) => {
+
+  const {title , description, image, price} = productInfo
+
+  const storageRef = ref(storage, 'products/' + image.name);
+
+  await uploadBytes(storageRef, image)
+
+  const url = await getDownloadURL(storageRef)
+
+  return addDoc(collection(db, "products"), {title, description, price, image: url});
 }
