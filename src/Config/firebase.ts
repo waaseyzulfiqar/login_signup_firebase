@@ -16,17 +16,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 
-export const register = (email:any, password:any, navigate:any) => {
-    createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    toast.success("Account created Successfully!");
-    navigate('/')
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    toast.warning("Something went wrong!");
-  });
+export const register = (email:any, password:any) => {
+  return createUserWithEmailAndPassword(auth, email, password)
+ 
 
 }
 

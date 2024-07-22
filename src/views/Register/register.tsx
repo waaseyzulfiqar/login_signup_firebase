@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { register } from '../../Config/firebase'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 function Register() {
 
@@ -9,6 +10,19 @@ function Register() {
     const [fullName, setFullName] = useState<any>()
     const [email, setEmail] = useState<any>()
     const [password, setPassword] = useState<any>()
+
+    const registerUser = () => {
+      register(email, password)
+      .then((userCredential) => {
+        toast.success("Account created Successfully!");
+        navigate('/')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        toast.warning("Something went wrong!");
+      });
+    }
 
   return (
     <div className="flex justify-center items-center w-full h-screen p-3">
@@ -32,7 +46,7 @@ function Register() {
         className="border border-black p-3 w-full rounded-md"
       />
 
-      <button onClick={() => register(email, password, navigate)} className="border w-fit border-black px-6 py-2 rounded hover:bg-black hover:text-white">Submit</button>
+      <button onClick={registerUser} className="border w-fit border-black px-6 py-2 rounded hover:bg-black hover:text-white">Submit</button>
     </div>
   </div>
   )
