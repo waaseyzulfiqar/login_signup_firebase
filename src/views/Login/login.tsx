@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../Config/firebase";
+import { toast } from "react-toastify";
 
 function Login() {
 
@@ -8,6 +9,17 @@ function Login() {
     
     const [email, setEmail] = useState<any>()
     const [password, setPassword] = useState<any>()
+
+    const signIn = async() => {
+      try{
+        await login(email,password)
+        toast.success("Successfully! Logged in");
+        navigate('/dashboard')
+      }catch(e:any) {
+        toast.warning(e.message);
+      }
+      };
+    
 
   return (
     <div className="flex justify-center items-center w-full h-screen p-3">
@@ -30,7 +42,7 @@ function Login() {
          className="text-center text-base cursor-pointer hover:text-blue-600">
           Don't have an account
         </p>
-        <button onClick={() => login(email,password, navigate)} className="border border-black px-6 py-2 rounded hover:bg-black hover:text-white">
+        <button onClick={() => signIn()} className="border border-black px-6 py-2 rounded hover:bg-black hover:text-white">
           Submit
         </button>
       </div>

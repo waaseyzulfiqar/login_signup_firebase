@@ -30,17 +30,8 @@ export const register = (email:any, password:any, navigate:any) => {
 
 }
 
-export const login = (email:any, password:any, navigate:any) => {
-    signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    toast.success("Successfully! Logged in");
-    navigate('/dashboard')
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    toast.warning("Something went wrong!");
-
-  });
+export const login = (email:any, password:any) => {
+   return signInWithEmailAndPassword(auth, email, password)
+  
 
 }
