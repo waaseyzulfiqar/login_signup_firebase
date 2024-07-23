@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { toast } from "react-toastify";
 import { getFirestore } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore"; 
@@ -45,4 +45,9 @@ export const addProduct = async(productInfo:any) => {
   const url = await getDownloadURL(storageRef)
 
   return addDoc(collection(db, "products"), {title, description, price, image: url});
+}
+
+
+export {
+  onAuthStateChanged
 }
