@@ -49,5 +49,5 @@ export const addProduct = async(productInfo:any) => {
 
 
 export {
-  onAuthStateChanged
+  onAuthStateChanged, auth
 }

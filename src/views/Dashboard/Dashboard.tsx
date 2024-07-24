@@ -1,16 +1,36 @@
 import axios from "axios";
+import { onAuthStateChanged, auth } from "../../Config/firebase";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-
   const navigate = useNavigate();
+
+  const [user, setUser] = useState()
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user.email);
+        const uid = user.uid;
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  });
 
   return (
     <div className="h-screen w-full p-7">
       <div className="flex justify-between mb-6">
         <h2 className="text-2xl text-center font-semibold">Dashboard</h2>
-        <button onClick={() => navigate('/addproduct')} className="px-3 py-2 font-medium border-2 border-black hover:bg-black hover:text-white rounded-md">Add Product</button>
+        <button
+          onClick={() => navigate("/addproduct")}
+          className="px-3 py-2 font-medium border-2 border-black hover:bg-black hover:text-white rounded-md"
+        >
+          Add Product
+        </button>
       </div>
       <div className="flex justify-center items-center gap-10 flex-wrap py-6">
         <div className="border w-[300px] h-[350px] overflow-hidden ease-out duration-300 shadow-md hover:scale-110 p-3 rounded-md cursor-pointer">
