@@ -24,6 +24,7 @@ function Login() {
   return (
     <div className="flex justify-center items-center w-full h-screen p-3">
       <div className="md:w-[500px] sm:w-[400px] w-[700] py-10 bg-slate-200 shadow-md px-8 md:py-16 flex flex-col gap-7 rounded-md">
+        <h2 className="text-4xl font-semibold text-center">Login</h2>
         <input
           type="Email"
           onChange={(e) => setEmail(e.target.value)}
@@ -43,7 +44,7 @@ function Login() {
           Don't have an account
         </p>
         <button onClick={() => signIn()} className="border border-black px-6 py-2 rounded hover:bg-black hover:text-white">
-          Submit
+          login
         </button>
       </div>
     </div>
