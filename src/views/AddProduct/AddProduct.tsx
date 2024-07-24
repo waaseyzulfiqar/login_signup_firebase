@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { addProduct } from "../../Config/firebase";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
   const [title, setTitle] = useState<any>();
@@ -8,10 +9,13 @@ function AddProduct() {
   const [image, setIamge] = useState<any>();
   const [price, setPrice] = useState<any>();
 
+  const navigate = useNavigate()
+
   const onSubmit = async() => {
     try{
         await addProduct({title, description, image, price})
         toast.success('Product added successfully!')
+        navigate('/dashboard')
     }catch(e:any){
       toast.error(e.message)
     }
