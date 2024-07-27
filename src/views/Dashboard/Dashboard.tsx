@@ -1,5 +1,5 @@
 import { collection, getDocs } from "firebase/firestore";
-import { onAuthStateChanged, auth, db } from "../../Config/firebase";
+import { onAuthStateChanged, auth, db, getProducts } from "../../Config/firebase";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,17 +15,9 @@ function Dashboard() {
       if (user) {
         setUser(user.email);
 
-        const getData = async() => {
-          const querySnapshot = await getDocs(collection(db, "products"));
-          const products:any = []
-          querySnapshot.forEach((doc) => {
+       const allProduct = await getProducts()
+       setProduct(allProduct)
 
-            products.push(doc.data());
-            setProduct(products)
-          });
-        };
-
-        getData()
 
         const uid = user.uid;
         // ...
@@ -37,6 +29,10 @@ function Dashboard() {
 
     
   }, []);
+
+  const detailPage = (item:any) => {
+    navigate(`/detail/${item.id}`)
+  }
 
   return (
     <div className="h-screen w-full p-7">
@@ -54,7 +50,7 @@ function Dashboard() {
       <div className="flex justify-center items-center gap-10 flex-wrap py-6">
         {product?.map((item:any) => (
 
-        <div className="border w-[300px] h-[320px] overflow-hidden ease-out duration-300 shadow-md hover:scale-110 px-3 py-3 rounded-md cursor-pointer">
+        <div onClick={() => detailPage(item)} className="border w-[300px] h-[320px] overflow-hidden ease-out duration-300 shadow-md hover:scale-110 px-3 py-3 rounded-md cursor-pointer">
           <img
             className="w-44 mb-6 mx-auto rounded-md"
             src={item.image}

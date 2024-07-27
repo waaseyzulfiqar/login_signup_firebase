@@ -52,24 +52,27 @@ export const addProduct = async (productInfo: any) => {
   });
 };
 
-// export const getProducts = async () => {
-//   // const docRef = doc(db, "products", "yzC6VYA9p8ACl84UA28y");
+export const getProducts = async () => {
+  const querySnapshot = await getDocs(collection(db, "products"));
 
-//   // const docSnap = await getDoc(docRef);
+  const products: any = [];
 
-//   // if (docSnap.exists()) {
-//   //   console.log("Document data:", docSnap.data());
-//   // } else {
-//   //   // docSnap.data() will be undefined in this case
-//   //   console.log("No such document!");
-//   // }
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
 
-//   const querySnapshot = await getDocs(collection(db, "products"));
-//   querySnapshot.forEach((doc) => {
-//     // doc.data() is never undefined for query doc snapshots
-//     let products = doc.data()
-//     return products;
-//   });
-// };
+    data.id = doc.id;
 
-export { onAuthStateChanged, auth,db };
+    products.push(data);
+  });
+
+  return products;
+};
+
+export const showProductOnDetailPage = async(param:any) => {
+  const docRef = doc(db, "products", `${param.id}`);
+  const docSnap = await getDoc(docRef);
+
+  return docSnap
+};
+
+export { onAuthStateChanged, auth, db };

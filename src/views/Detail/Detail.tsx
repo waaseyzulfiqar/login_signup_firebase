@@ -1,25 +1,18 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { showProductOnDetailPage } from "../../Config/firebase";
 
 function Detail() {
   const [handleProduct, setHandleProduct] = useState<any>([]);
 
-  const [rating, setRating] = useState<any>([]);
-
   const param = useParams();
 
   useEffect(() => {
-    axios
-      .get(`https://fakestoreapi.com/products/${param.id}`)
-      .then((res) => {
-        setHandleProduct(res.data);
-        setRating(handleProduct.rating)
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
-  console.log(handleProduct);
+    const singleProduct = showProductOnDetailPage(param)
+
+    console.log(singleProduct);
+  })
 
   return (
     <div className="h-screen w-full px-14 py-5">
@@ -31,7 +24,7 @@ function Detail() {
           <h1 className="text-xl font-light">{handleProduct.title}</h1>
           <p>Actual Price: <s>$200</s></p>
           <p className="text-sm font-medium text-indigo-700">{`Deal of the day: $${handleProduct.price}`}</p>
-          <p className="capitalize text-slate-500">{handleProduct.description}</p>
+          <p className="capitalize text-slate-500"></p>
           <div className="bg-indigo-500 w-fit text-white font-semibold px-3 py-2 rounded-md">Add to Cart</div>
         </div>
       </div>
