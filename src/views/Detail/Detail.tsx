@@ -32,6 +32,7 @@ function Detail() {
           <p>
             Actual Price: <s>$200</s>
           </p>
+          <p className="font-medium">{handleProduct.description}</p>
           <p className="text-sm font-medium text-indigo-700">{`Deal of the day: $${handleProduct.price}`}</p>
           <p className="capitalize text-slate-500"></p>
           <div className="bg-indigo-500 w-fit text-white font-semibold px-3 py-2 rounded-md cursor-pointer hover:bg-indigo-400">
