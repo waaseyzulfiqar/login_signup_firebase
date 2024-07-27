@@ -68,11 +68,5 @@ export const getProducts = async () => {
   return products;
 };
 
-export const showProductOnDetailPage = async(param:any) => {
-  const docRef = doc(db, "products", `${param.id}`);
-  const docSnap = await getDoc(docRef);
 
-  return docSnap
-};
-
-export { onAuthStateChanged, auth, db };
+export { onAuthStateChanged, auth, db, getDoc, doc };
