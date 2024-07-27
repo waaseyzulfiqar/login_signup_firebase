@@ -69,4 +69,20 @@ export const getProducts = async () => {
 };
 
 
+ export const showProductOnDetailPage = async(param:any) => {
+
+  const docRef = doc(db, "products", param);
+
+  const docSnap = await getDoc(docRef);
+
+  return docSnap.data()
+
+  // if (docSnap.exists()) {
+
+  // } else {
+  //   // docSnap.data() will be undefined in this case
+  //   console.log("No such document!");
+  // }
+};
+
 export { onAuthStateChanged, auth, db, getDoc, doc };

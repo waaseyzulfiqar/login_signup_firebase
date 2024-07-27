@@ -1,7 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { db } from "../../Config/firebase";
+import { db, showProductOnDetailPage } from "../../Config/firebase";
 
 function Detail() {
   const [handleProduct, setHandleProduct] = useState<any>([]);
@@ -9,20 +9,16 @@ function Detail() {
   const param = useParams();
 
   useEffect(() => {
-    const showProductOnDetailPage = async() => {
-      const docRef = doc(db, "products", `${param.id}`);
-
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setHandleProduct(docSnap.data())
-      } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
-      }
-    };
     
-    showProductOnDetailPage()
+    const singleProduct = async() => {
+
+      const product = await showProductOnDetailPage(`${param.id}`)
+
+      setHandleProduct(product);
+    }
+
+    singleProduct()
+    
   },[]);
   
   return (
