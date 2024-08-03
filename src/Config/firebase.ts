@@ -53,6 +53,7 @@ export const addProduct = async (productInfo: any) => {
 };
 
 export const getProducts = async () => {
+  
   const querySnapshot = await getDocs(collection(db, "products"));
 
   const products: any = [];
@@ -76,13 +77,6 @@ export const getProducts = async () => {
   const docSnap = await getDoc(docRef);
 
   return docSnap.data()
-
-  // if (docSnap.exists()) {
-
-  // } else {
-  //   // docSnap.data() will be undefined in this case
-  //   console.log("No such document!");
-  // }
 };
 
 export { onAuthStateChanged, auth, db, getDoc, doc };
