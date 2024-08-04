@@ -1,7 +1,7 @@
-import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { db, showProductOnDetailPage } from "../../Config/firebase";
+import { showProductOnDetailPage } from "../../Config/firebase";
+import { IoCart } from "react-icons/io5";
 
 function Detail() {
   const [handleProduct, setHandleProduct] = useState<any>([]);
@@ -9,21 +9,24 @@ function Detail() {
   const param = useParams();
 
   useEffect(() => {
-    
-    const singleProduct = async() => {
-
-      const product = await showProductOnDetailPage(`${param.id}`)
+    const singleProduct = async () => {
+      const product = await showProductOnDetailPage(`${param.id}`);
 
       setHandleProduct(product);
-    }
+    };
 
-    singleProduct()
-    
-  },[]);
-  
+    singleProduct();
+  }, []);
+
   return (
     <div className="h-screen w-full px-14 py-5">
-      <h2 className="text-center text-2xl font-semibold">Detail</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-center text-2xl font-semibold">Detail</h2>
+        <div className="flex">
+          <IoCart className="text-2xl cursor-pointer" />
+          <span className="text-sm font-medium">0</span>
+        </div>
+      </div>
 
       <div className="flex justify-around items-center mt-20 py-8 shadow-lg rounded-lg border">
         <img className="w-72" src={handleProduct.image} alt="" />
