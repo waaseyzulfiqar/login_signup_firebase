@@ -61,7 +61,7 @@ function Detail() {
         </div>
       </div>
 
-      {modal && <Modal closeModal={setModal}/>}
+      {modal && <Modal closeModal={setModal} data={cart}/>}
       
 
     </div>

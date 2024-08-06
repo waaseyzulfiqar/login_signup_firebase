@@ -52,8 +52,8 @@ function Dashboard() {
       </div>
 
       <div className="flex justify-center items-center gap-10 flex-wrap py-6">
-        {product?.map((item: any) => (
-          <div
+        {product?.map((item: any, index:any) => (
+          <div key={index}
             onClick={() => detailPage(item)}
             className="border w-[300px] h-[320px] overflow-hidden ease-out duration-300 shadow-md hover:scale-110 px-3 py-3 rounded-md cursor-pointer"
           >
