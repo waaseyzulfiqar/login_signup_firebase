@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { showProductOnDetailPage } from "../../Config/firebase";
 import { IoCart } from "react-icons/io5";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/themeSlice";
 
 function Detail() {
-  const [handleProduct, setHandleProduct] = useState<any>([]);
+  const [handleProduct, setHandleProduct] = useState<any>({});
 
   const param = useParams();
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const singleProduct = async () => {
@@ -38,7 +42,9 @@ function Detail() {
           <p className="font-medium">{handleProduct.description}</p>
           <p className="text-sm font-medium text-indigo-700">{`Deal of the day: $${handleProduct.price}`}</p>
           <p className="capitalize text-slate-500"></p>
-          <div className="bg-indigo-500 w-fit text-white font-semibold px-3 py-2 rounded-md cursor-pointer hover:bg-indigo-400">
+          <div
+          onClick={() => dispatch(addToCart(handleProduct))}
+          className="bg-indigo-500 w-fit text-white font-semibold px-3 py-2 rounded-md cursor-pointer hover:bg-indigo-400">
             Add to Cart
           </div>
         </div>
