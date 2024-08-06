@@ -58,6 +58,7 @@ function Dashboard() {
           <button onClick={() => dispatch(setTheme('red'))} className="border px-5 py-1 bg-red-500 text-white rounded">red</button>
           <button onClick={() => dispatch(setTheme('blue'))} className="border px-5 py-1 bg-blue-500 text-white rounded">blue</button>
           <button onClick={() => dispatch(setTheme('green'))} className="border px-5 py-1 bg-green-500 text-white rounded">green</button>
+          <button onClick={() => dispatch(setTheme(''))} className="border-2 px-5 py-1  rounded">Normal</button>
         </div>
       </div>
 
