@@ -1,24 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export interface themeState {
-  color: string
+export interface cartState {
+  cart: any
 }
 
-const initialState: themeState = {
-  color: ''
+const initialState: cartState = {
+  cart: []
 }
 
-export const themeSlice = createSlice({
-  name: 'theme',
+export const cartSlice = createSlice({
+  name: 'cart',
   initialState,
   reducers: {
-    setTheme: (state, data) => {
+    addToCart: (state, data) => {
       
-      state.color = data.payload
+      state.cart.push(data.payload)
     },
   },
 })
 
-export const { setTheme } = themeSlice.actions
+export const { addToCart } = cartSlice.actions
 
-export default themeSlice.reducer
+export default cartSlice.reducer

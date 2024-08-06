@@ -4,9 +4,7 @@ import {
   getProducts,
 } from "../../Config/firebase";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setTheme } from "../../store/themeSlice";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -15,9 +13,7 @@ function Dashboard() {
 
   const [product, setProduct] = useState<any>([]);
 
-  const dispatch = useDispatch()
 
-  const color = useSelector<any>(state =>  state.color)
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user: any) => {
@@ -41,7 +37,7 @@ function Dashboard() {
   };
 
   return (
-    <div style={{backgroundColor: `${color}`}} className="h-screen w-full p-7">
+    <div className="h-screen w-full p-7">
       <div className="flex justify-between mb-6">
         <h2 className="text-2xl text-center font-semibold">Dashboard</h2>
         <p className="font-medium">
@@ -53,13 +49,6 @@ function Dashboard() {
         >
           Add Product
         </button>
-
-        <div>
-          <button onClick={() => dispatch(setTheme('red'))} className="border px-5 py-1 bg-red-500 text-white rounded">red</button>
-          <button onClick={() => dispatch(setTheme('blue'))} className="border px-5 py-1 bg-blue-500 text-white rounded">blue</button>
-          <button onClick={() => dispatch(setTheme('green'))} className="border px-5 py-1 bg-green-500 text-white rounded">green</button>
-          <button onClick={() => dispatch(setTheme(''))} className="border-2 px-5 py-1  rounded">Normal</button>
-        </div>
       </div>
 
       <div className="flex justify-center items-center gap-10 flex-wrap py-6">

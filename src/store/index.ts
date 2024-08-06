@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import themeReducer from "./themeSlice";
+import cartReducer from "./themeSlice";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
@@ -10,7 +10,7 @@ const persistConfig = {
     storage,
   }
 
-  const persistedReducer = persistReducer(persistConfig, themeReducer)
+  const persistedReducer = persistReducer(persistConfig, cartReducer)
 
 
 const store = configureStore({
