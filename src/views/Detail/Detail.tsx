@@ -4,7 +4,7 @@ import { showProductOnDetailPage } from "../../Config/firebase";
 import { IoCart } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/themeSlice";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Modal from "../../components/Modal/Modal";
 
 function Detail() {
   const [handleProduct, setHandleProduct] = useState<any>({});
@@ -15,9 +15,7 @@ function Detail() {
 
   const cart: any = useSelector<any>((state) => state.cart);
 
-  const [modal, setModal] = useState(false);
-
-  console.log(cart);
+  const [modal, setModal] = useState(false)
 
   useEffect(() => {
     const singleProduct = async () => {
@@ -62,6 +60,10 @@ function Detail() {
           </div>
         </div>
       </div>
+
+      {modal && <Modal closeModal={setModal}/>}
+      
+
     </div>
   );
 }
