@@ -6,23 +6,6 @@ interface ModalProps {
 
 function Modal({ closeModal, data }: any) {
   return (
-    // <div className="h-screen w-full fixed inset-0 flex items-center justify-center bg-slate-200 bg-opacity-100 z-50">
-    //   <div className="w-[500px] p-6 bg-white shadow-lg rounded">
-    //     {data ? data.map((x: any, index:any) => (
-    //       <div key={index}>
-    //         <h1 className="text-xl font-semibold mb-4">{x.title}</h1>
-    //         <p>{x.description}</p>
-    //         <button
-    //           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition"
-    //           onClick={() => closeModal(false)}
-    //         >
-    //           Close Modal
-    //         </button>
-    //       </div>
-    //     )): <h1 className="text-black">No Products to show...</h1>}
-    //   </div>
-    // </div>
-
     <div className="h-screen w-full fixed inset-0 flex justify-center items-center  bg-slate-200 bg-opacity-100 z-50 overflow-y-auto">
       <div className="w-[80%] max-h-[68vh] px-5 py-5 bg-white shadow-lg rounded overflow-y-auto">
         {data && data.length > 0 ? (

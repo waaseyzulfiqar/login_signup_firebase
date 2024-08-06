@@ -9,9 +9,7 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <div className="App">
-          <header className="App-header">
             <Route />
-          </header>
           <Notification />
         </div>
       </PersistGate>
