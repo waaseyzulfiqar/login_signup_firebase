@@ -5,6 +5,7 @@ import { IoCart } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/themeSlice";
 import Modal from "../../components/Modal/Modal";
+import { toast } from "react-toastify";
 
 function Detail() {
   const [handleProduct, setHandleProduct] = useState<any>({});
@@ -57,7 +58,11 @@ function Detail() {
           <p className="text-sm font-medium text-indigo-700">{`Deal of the day: $${handleProduct.price}`}</p>
           <p className="capitalize text-slate-500"></p>
           <div
-            onClick={() => dispatch(addToCart(handleProduct))}
+            onClick={() => {
+              dispatch(addToCart(handleProduct))
+              toast.success("Added to Cart!");
+
+            }}
             className="bg-indigo-500 w-fit text-white font-semibold px-3 py-2 rounded-md cursor-pointer hover:bg-indigo-400"
           >
             Add to Cart
