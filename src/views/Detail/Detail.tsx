@@ -14,8 +14,12 @@ function Detail() {
   const dispatch = useDispatch();
 
   const cart: any = useSelector<any>((state) => state.cart);
+  
 
   const [modal, setModal] = useState(false)
+
+  const [quantity, setQuantity] = useState<any>(0)
+
 
   useEffect(() => {
     const singleProduct = async () => {
@@ -61,7 +65,7 @@ function Detail() {
         </div>
       </div>
 
-      {modal && <Modal closeModal={setModal} data={cart}/>}
+      {modal && <Modal closeModal={setModal} data={cart} dispatch={dispatch}/>}
       
 
     </div>
