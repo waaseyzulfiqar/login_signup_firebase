@@ -2,13 +2,12 @@ import { GrAdd } from "react-icons/gr";
 import { FiMinus } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import { removeFromCart } from "../../store/themeSlice";
-import { useDispatch } from "react-redux";
 
 interface ModalProps {
   closeModal: (closeModal: boolean) => void;
 }
 
-function Modal({ closeModal, data,dispatch }: any) {
+function Modal({ closeModal, data, dispatch }: any) {
   return (
     <div className="h-screen w-full fixed inset-0 flex justify-center items-center  bg-slate-200 bg-opacity-100 z-50 overflow-y-auto">
       <div className="w-[80%] max-h-[68vh] px-5 py-5 bg-white shadow-lg rounded overflow-y-auto">
@@ -40,7 +39,10 @@ function Modal({ closeModal, data,dispatch }: any) {
                   <p>{x.quantity}</p>
                   <GrAdd className="border font-bold p-1 text-2xl rounded cursor-pointer" /> */}
 
-                  <MdDeleteOutline onClick={() => dispatch(removeFromCart(x.index))} className="border font-bold p-1 text-3xl rounded cursor-pointer hover:bg-black hover:text-white" />
+                  <MdDeleteOutline
+                    onClick={() => dispatch(removeFromCart(x.index))}
+                    className="border font-bold p-1 text-3xl rounded cursor-pointer hover:bg-black hover:text-white"
+                  />
                 </div>
               </div>
             </div>

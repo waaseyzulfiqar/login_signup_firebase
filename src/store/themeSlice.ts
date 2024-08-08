@@ -17,7 +17,6 @@ export const cartSlice = createSlice({
     },
 
     removeFromCart: (state, data) => {
-      
       state.cart.splice(data.payload, 1);
     },
   },

@@ -15,12 +15,8 @@ function Detail() {
   const dispatch = useDispatch();
 
   const cart: any = useSelector<any>((state) => state.cart);
-  
 
-  const [modal, setModal] = useState(false)
-
-  const [quantity, setQuantity] = useState<any>(0)
-
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     const singleProduct = async () => {
@@ -45,8 +41,6 @@ function Detail() {
         </div>
       </div>
 
-  
-
       <div className="flex justify-around items-center mt-20 py-8 shadow-lg rounded-lg border">
         <img className="w-72" src={handleProduct.image} alt="" />
         <div className="w-[450px] flex flex-col gap-6">
@@ -59,9 +53,8 @@ function Detail() {
           <p className="capitalize text-slate-500"></p>
           <div
             onClick={() => {
-              dispatch(addToCart(handleProduct))
+              dispatch(addToCart(handleProduct));
               toast.success("Added to Cart!");
-
             }}
             className="bg-indigo-500 w-fit text-white font-semibold px-3 py-2 rounded-md cursor-pointer hover:bg-indigo-400"
           >
@@ -70,9 +63,7 @@ function Detail() {
         </div>
       </div>
 
-      {modal && <Modal closeModal={setModal} data={cart} dispatch={dispatch}/>}
-      
-
+      {modal && <Modal closeModal={setModal} data={cart} dispatch={dispatch} />}
     </div>
   );
 }
