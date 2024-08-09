@@ -1,7 +1,8 @@
 import { GrAdd } from "react-icons/gr";
 import { FiMinus } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
-import { removeFromCart } from "../../store/themeSlice";
+import {  removeFromCart } from "../../store/themeSlice";
+import { increment } from "firebase/firestore";
 
 interface ModalProps {
   closeModal: (closeModal: boolean) => void;
@@ -30,19 +31,23 @@ function Modal({ closeModal, data, dispatch }: any) {
                   <h1 className="text-xl font-semibold mb-4">{x.title}</h1>
                   <p>{x.description}</p>
                   <p className="font-medium mt-1">Rs. {x.price}</p>
+                  {/* <p>{x.id}</p> */}
                 </div>
               </div>
 
               <div className="flex justify-center place-items-end">
                 <div className="flex justify-center items-center gap-2">
-                  {/* <FiMinus className="border p-1 text-2xl rounded cursor-pointer"/>
-                  <p>{x.quantity}</p>
-                  <GrAdd className="border font-bold p-1 text-2xl rounded cursor-pointer" /> */}
 
-                  <MdDeleteOutline
-                    onClick={() => dispatch(removeFromCart(x.index))}
+                  {x.quantity === 1 ? <MdDeleteOutline
+                    onClick={() => dispatch(removeFromCart(x.id))}
                     className="border font-bold p-1 text-3xl rounded cursor-pointer hover:bg-black hover:text-white"
-                  />
+                  /> : <FiMinus  className="border p-1 text-2xl rounded cursor-pointer"/>}
+                  
+                  
+                  <p>{x.quantity}</p>
+
+                  <GrAdd  className="border font-bold p-1 text-2xl rounded cursor-pointer" />
+
                 </div>
               </div>
             </div>

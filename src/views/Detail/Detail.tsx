@@ -21,8 +21,7 @@ function Detail() {
   useEffect(() => {
     const singleProduct = async () => {
       const product = await showProductOnDetailPage(`${param.id}`);
-
-      setHandleProduct(product);
+      setHandleProduct({...product, id: param.id});
     };
 
     singleProduct();
@@ -50,7 +49,7 @@ function Detail() {
           </p>
           <p className="font-medium">{handleProduct.description}</p>
           <p className="text-sm font-medium text-indigo-700">{`Deal of the day: $${handleProduct.price}`}</p>
-          <p className="capitalize text-slate-500"></p>
+          {/* <p className="capitalize text-slate-500">{handleProduct.id}</p> */}
           <div
             onClick={() => {
               dispatch(addToCart(handleProduct));
