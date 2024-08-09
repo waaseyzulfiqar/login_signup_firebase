@@ -13,16 +13,13 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, data) => {
-      state.cart.push({...data.payload, quantity: 1});
+
+        state.cart.push(data.payload);
     },
 
     removeFromCart: (state, data) => {
       state.cart.splice(data.payload, 1);
     },
-
-    increment: (state, data) => {
-      
-    }
   },
 });
 

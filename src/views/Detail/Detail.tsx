@@ -21,7 +21,8 @@ function Detail() {
   useEffect(() => {
     const singleProduct = async () => {
       const product = await showProductOnDetailPage(`${param.id}`);
-      setHandleProduct({...product, id: param.id});
+      
+      setHandleProduct(product);
     };
 
     singleProduct();
