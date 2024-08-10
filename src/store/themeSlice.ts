@@ -13,12 +13,28 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, data) => {
-
-        state.cart.push(data.payload);
+      const existingItem = state.cart.find(
+        (item:any) => item.id === data.payload.id
+      );
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        state.cart.push({ ...data.payload, quantity: 1 });
+      }
     },
-
     removeFromCart: (state, data) => {
-      state.cart.splice(data.payload, 1);
+      const existingItem = state.cart.find((item:any) => item.id === data.payload);
+      if (existingItem) {
+        if (existingItem.quantity > 1) {
+          existingItem.quantity -= 1;
+        } else {
+          const index = state.cart.findIndex(
+            (item:any) => item.id === data.payload
+          );
+          
+            state.cart.splice(index, 1);
+        }
+      }
     },
   },
 });
