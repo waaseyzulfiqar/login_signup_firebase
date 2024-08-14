@@ -1,8 +1,4 @@
-import {
-  onAuthStateChanged,
-  auth,
-  getProducts,
-} from "../../Config/firebase";
+import { onAuthStateChanged, auth, getProducts, logout } from "../../Config/firebase";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,23 +9,14 @@ function Dashboard() {
 
   const [product, setProduct] = useState<any>([]);
 
-
-
   useEffect(() => {
-    onAuthStateChanged(auth, async (user: any) => {
-      if (user) {
-        setUser(user.email);
+    const products = async() => {
+      const allProduct = await getProducts();
+      setProduct(allProduct);
 
-        const allProduct = await getProducts();
-        setProduct(allProduct);
-
-        const uid = user.uid;
-        // ...
-      } else {
-        // User is signed out
-        // ...
-      }
-    });
+    }
+    products()
+      
   }, []);
 
   const detailPage = (item: any) => {
@@ -40,20 +27,28 @@ function Dashboard() {
     <div className="h-screen w-full p-7">
       <div className="flex justify-between mb-6">
         <h2 className="text-2xl text-center font-semibold">Dashboard</h2>
-        <p className="font-medium">
-          User Email: <span className="font-bold underline">{user}</span>
-        </p>
-        <button
-          onClick={() => navigate("/addproduct")}
-          className="px-3 py-2 font-medium border-2 border-black hover:bg-black hover:text-white rounded-md"
-        >
-          Add Product
-        </button>
+        
+        <div>
+          <button
+            onClick={() => navigate("/addproduct")}
+            className="px-3 py-2 font-medium border-2 border-black hover:bg-black hover:text-white rounded-md"
+          >
+            Add Product
+          </button>
+          <button
+            onClick={logout}
+            className="px-3 py-2 ml-2 font-medium border-2 border-black hover:bg-black hover:text-white rounded-md"
+          >
+            Logout
+          </button>
+          
+        </div>
       </div>
 
       <div className="flex justify-center items-center gap-10 flex-wrap py-6">
-        {product?.map((item: any, index:any) => (
-          <div key={index}
+        {product?.map((item: any, index: any) => (
+          <div
+            key={index}
             onClick={() => detailPage(item)}
             className="border w-[300px] h-[320px] overflow-hidden ease-out duration-300 shadow-md hover:scale-110 px-3 py-3 rounded-md cursor-pointer"
           >

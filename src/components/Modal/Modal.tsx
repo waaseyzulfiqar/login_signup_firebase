@@ -1,8 +1,6 @@
-import { GrAdd } from "react-icons/gr";
 import { FiMinus } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import { removeFromCart } from "../../store/themeSlice";
-import { increment } from "firebase/firestore";
 
 interface ModalProps {
   closeModal: (closeModal: boolean) => void;

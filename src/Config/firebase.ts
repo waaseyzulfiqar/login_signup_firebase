@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 import { toast } from "react-toastify";
 import { doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
@@ -35,6 +36,10 @@ export const login = (email: any, password: any) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
 
+export const logout = async() => {
+  await signOut(auth)
+};
+
 export const addProduct = async (productInfo: any) => {
   const { title, description, image, price } = productInfo;
 
@@ -53,7 +58,6 @@ export const addProduct = async (productInfo: any) => {
 };
 
 export const getProducts = async () => {
-  
   const querySnapshot = await getDocs(collection(db, "products"));
 
   const products: any = [];
@@ -69,14 +73,12 @@ export const getProducts = async () => {
   return products;
 };
 
-
- export const showProductOnDetailPage = async(param:any) => {
-
+export const showProductOnDetailPage = async (param: any) => {
   const docRef = doc(db, "products", param);
 
   const docSnap = await getDoc(docRef);
 
-  return docSnap.data()
+  return docSnap.data();
 };
 
 export { onAuthStateChanged, auth, db, getDoc, doc };
