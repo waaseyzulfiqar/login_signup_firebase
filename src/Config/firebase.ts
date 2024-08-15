@@ -36,9 +36,9 @@ export const login = (email: any, password: any) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
 
-export const logout = async() => {
-  await signOut(auth)
-};
+export const logout = async () => {
+    return signOut(auth);
+  };
 
 export const addProduct = async (productInfo: any) => {
   const { title, description, image, price } = productInfo;

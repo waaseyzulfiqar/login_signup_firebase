@@ -1,33 +1,51 @@
-import { onAuthStateChanged, auth, getProducts, logout } from "../../Config/firebase";
+import { auth, getProducts, logout, onAuthStateChanged } from "../../Config/firebase";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Dashboard() {
   const navigate = useNavigate();
 
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<any>();
 
   const [product, setProduct] = useState<any>([]);
 
+  onAuthStateChanged(auth, (user:any) => {
+    setUser(user)
+  })
+
   useEffect(() => {
-    const products = async() => {
+    const products = async () => {
       const allProduct = await getProducts();
       setProduct(allProduct);
-
-    }
-    products()
-      
+    };
+    products();
   }, []);
 
   const detailPage = (item: any) => {
     navigate(`/detail/${item.id}`);
   };
 
+  const userLoggedOut = async () => {
+    try {
+      if (user) {
+        await logout();
+        // setUser(null)
+        toast.success("Successfully logged out!");
+      } else {
+        toast.error("Error 404: Already logged out!");
+      }
+    } catch (error:any) {
+      toast.error(`Logout failed: ${error.message}`);
+    }
+  };
+
   return (
     <div className="h-screen w-full p-7">
       <div className="flex justify-between mb-6">
         <h2 className="text-2xl text-center font-semibold">Dashboard</h2>
-        
+        {user && <p className="font-medium">User Email: {user?.email}</p>
+      }
         <div>
           <button
             onClick={() => navigate("/addproduct")}
@@ -36,12 +54,11 @@ function Dashboard() {
             Add Product
           </button>
           <button
-            onClick={logout}
+            onClick={userLoggedOut}
             className="px-3 py-2 ml-2 font-medium border-2 border-black hover:bg-black hover:text-white rounded-md"
           >
             Logout
           </button>
-          
         </div>
       </div>
 

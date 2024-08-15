@@ -19,34 +19,33 @@ const Main = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user:any) => {
-      setUser(user)
-    })
+    onAuthStateChanged(auth, (user: any) => {
+      setUser(user);
+    });
   }, []);
 
-
   useEffect(() => {
-    const pathName = window.location.pathname;
+    const pathname = window.location.pathname;
     onAuthStateChanged(auth, (user: any) => {
       if (user) {
         console.log("user logged in hua");
 
-        if (pathName == "/login" || pathName == "/register") {
-          navigate("/");
+        if (pathname === "/login" || pathname === '/register') {
+          navigate("/")
+
         } else {
-          if (pathName === "/addproduct") {
-            navigate("/login");
+          console.log("user logged in nh hy")
+          
+          if (pathname === "/addproduct" || pathname === '/detail/:id') {
+            navigate("/login")
           }
         }
       }
+
     });
-  },[window.location.pathname, user])
+  }, [window.location.pathname, user]);
 
-
-
-  return <div>
-    <Outlet />
-  </div>;
+  return  <Outlet />
 };
 
 const router = createBrowserRouter([

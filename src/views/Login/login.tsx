@@ -14,7 +14,7 @@ function Login() {
       try{
         await login(email,password)
         toast.success("Successfully! Logged in");
-        navigate('/dashboard')
+        navigate('/')
       }catch(e:any) {
         toast.warning(e.message);
       }
