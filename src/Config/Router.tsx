@@ -36,7 +36,7 @@ const Main = () => {
         } else {
           console.log("user logged in nh hy")
           
-          if (pathname === "/addproduct" || pathname === '/detail/:id') {
+          if (pathname === "/addproduct") {
             navigate("/login")
           }
         }

@@ -29,8 +29,7 @@ function Dashboard() {
   const userLoggedOut = async () => {
     try {
       if (user) {
-        await logout();
-        // setUser(null)
+        await logout()
         toast.success("Successfully logged out!");
       } else {
         toast.error("Error 404: Already logged out!");
@@ -48,7 +47,7 @@ function Dashboard() {
       }
         <div>
           <button
-            onClick={() => navigate("/addproduct")}
+            onClick={() => navigate('/addproduct')}
             className="px-3 py-2 font-medium border-2 border-black hover:bg-black hover:text-white rounded-md"
           >
             Add Product

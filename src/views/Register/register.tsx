@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { register } from '../../Config/firebase'
+import { auth, logout, register } from '../../Config/firebase'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -14,8 +14,9 @@ function Register() {
     const registerUser = async() => {
       try{
         await register({email, password, fullName})
+        await logout()
         toast.success("Account created Successfully!");
-        navigate('/')
+        navigate('/login')
       }catch(e:any){
         toast.warning("Something went wrong!");
       };
