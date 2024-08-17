@@ -27,16 +27,13 @@ function Dashboard() {
   };
 
   const userLoggedOut = async () => {
-    try {
       if (user) {
         await logout()
+        navigate('/')
         toast.success("Successfully logged out!");
       } else {
         toast.error("Error 404: Already logged out!");
       }
-    } catch (error:any) {
-      toast.error(`Logout failed: ${error.message}`);
-    }
   };
 
   return (

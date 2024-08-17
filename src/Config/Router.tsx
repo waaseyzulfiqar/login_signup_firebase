@@ -26,25 +26,18 @@ const Main = () => {
 
   useEffect(() => {
     const pathname = window.location.pathname;
-    onAuthStateChanged(auth, (user: any) => {
-      if (user) {
-        console.log("user logged in hua");
-
-        if (pathname === "/login" || pathname === '/register') {
-          navigate("/")
-
-        } else {
-          console.log("user logged in nh hy")
-          
-          if (pathname === "/addproduct") {
-            navigate("/login")
-          }
-        }
+  onAuthStateChanged(auth, (user: any) => {
+    if (user) { 
+      if (pathname === "/login" || pathname === "/register") {
+        navigate("/")
       }
-
-    });
-  }, [window.location.pathname, user]);
-
+    } else {
+      if (pathname === "/addproduct") {
+        navigate("/login")
+      }
+    }
+  });
+}, [window.location.pathname, user]);
   return  <Outlet />
 };
 
