@@ -6,7 +6,6 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import { toast } from "react-toastify";
 import { doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";

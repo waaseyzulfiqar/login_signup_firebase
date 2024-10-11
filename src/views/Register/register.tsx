@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { auth, logout, register } from '../../Config/firebase'
+import {logout, register } from '../../Config/firebase'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 

@@ -2,10 +2,6 @@ import { FiMinus } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import { removeFromCart } from "../../store/themeSlice";
 
-interface ModalProps {
-  closeModal: (closeModal: boolean) => void;
-}
-
 function Modal({ closeModal, data, dispatch }: any) {
   return (
     <div className="h-screen w-full fixed inset-0 flex justify-center items-center  bg-slate-200 bg-opacity-100 z-50 overflow-y-auto">
