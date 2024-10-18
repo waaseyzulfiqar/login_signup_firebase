@@ -6,7 +6,7 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import { doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
@@ -40,37 +40,17 @@ export const logout = async () => {
   };
 
 export const addProduct = async (productInfo: any) => {
-  const { title, description, image, price } = productInfo;
+  const {image} = productInfo;
 
   const storageRef = ref(storage, "products/" + image.name);
 
   await uploadBytes(storageRef, image);
 
-  const url = await getDownloadURL(storageRef);
+  const imgUrl = await getDownloadURL(storageRef);
 
-  return addDoc(collection(db, "products"), {
-    title,
-    description,
-    price,
-    image: url,
-  });
+  return imgUrl
 };
 
-export const getProducts = async () => {
-  const querySnapshot = await getDocs(collection(db, "products"));
-
-  const products: any = [];
-
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
-
-    data.id = doc.id;
-
-    products.push(data);
-  });
-
-  return products;
-};
 
 export const showProductOnDetailPage = async (param: any) => {
   const docRef = doc(db, "products", param);

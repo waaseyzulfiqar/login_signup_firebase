@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { showProductOnDetailPage } from "../../Config/firebase";
 import { IoCart } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/themeSlice";
 import Modal from "../../components/Modal/Modal";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 function Detail() {
-  const [handleProduct, setHandleProduct] = useState<any>({});
+  const [handleProduct, setHandleProduct] = useState<any>([]);
 
   const param = useParams();
 
@@ -20,9 +20,9 @@ function Detail() {
 
   useEffect(() => {
     const singleProduct = async () => {
-      const product = await showProductOnDetailPage(`${param.id}`);
-      
-      setHandleProduct(product);
+      const product = await axios.get(`http://localhost:3001/product/singleProduct/${param.id}`)
+      console.log(product.data);
+      setHandleProduct(product.data[0]);
     };
 
     singleProduct();
@@ -42,7 +42,7 @@ function Detail() {
       </div>
 
       <div className="flex justify-around items-center mt-20 py-8 shadow-lg rounded-lg border">
-        <img className="w-72" src={handleProduct.image} alt="" />
+        <img className="w-72" src={handleProduct?.image} alt="" />
         <div className="w-[450px] flex flex-col gap-6">
           <h1 className="text-2xl font-medium">{handleProduct.title}</h1>
           <p>
