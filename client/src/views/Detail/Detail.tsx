@@ -20,7 +20,7 @@ function Detail() {
 
   useEffect(() => {
     const singleProduct = async () => {
-      const product = await axios.get(`http://localhost:3001/product/singleProduct/${param.id}`)
+      const product = await axios.get(`https://mern-olx-api.vercel.app/product/singleProduct/${param.id}`)
       console.log(product.data);
       setHandleProduct(product.data[0]);
     };
