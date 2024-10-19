@@ -19,6 +19,7 @@ function AddProduct() {
       const imgUrl = await addProduct({ image });
       await fetch("https://mern-olx-api.vercel.app/product/create", {
         method: "POST",
+        mode: 'no-cors',
         headers: {
           "Content-Type": "application/json",
         },
