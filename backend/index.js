@@ -11,7 +11,7 @@ app.get('/', (req,res)=> {
 app.use(express.json())
 app.use(cors(
     {
-        origin: [''],
+        origin: ['https://mern-olx-frontend.vercel.app'],
         methods: ["POST", "GET"],
         credentials: true
     }
