@@ -43,15 +43,15 @@ export const logout = async () => {
     image: File;
   }
   
-  export const addProduct = async (image:any) => {
+  export const addProduct = async (productInfo: ProductInfo) => {
     
   
+    const { image } = productInfo;
     const storageRef = ref(storage, "products/" + image.name);
   
     try {
       await uploadBytes(storageRef, image);
       const imgUrl = await getDownloadURL(storageRef);
-      console.log(imgUrl);
       return imgUrl;
     } catch (error) {
       console.error("Error uploading image or retrieving URL:", error);
