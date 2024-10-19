@@ -11,11 +11,9 @@ app.get('/', (req,res)=> {
 app.use(express.json())
 app.use(
     cors({
-      origin: ['http://mern-olx-frontend.vercel.app','http://mern-olx-frontend.vercel.app/product/allProducts', 'http://mern-olx-frontend.vercel.app/product/create'],// Allow specific origin
+      origin: ['http://mern-olx-frontend.vercel.app'], // Allow specific origin
       methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow HTTP methods
-      allowedHeaders: ['Content-Type', 'Authorization'], // Expose headers
       credentials: true, // Allow credentials
-      preflightContinue: true // Handle preflight requests
     })
   );
 

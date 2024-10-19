@@ -15,8 +15,6 @@ function Dashboard() {
     setUser(user);
   });
 
-  axios.defaults.withCredentials = true
-
   useEffect(() => {
     const data = async () => {
       await axios.get("https://mern-olx-api.vercel.app/product/allProducts").then((res) => {

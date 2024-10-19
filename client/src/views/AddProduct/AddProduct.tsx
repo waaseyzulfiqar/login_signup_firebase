@@ -5,43 +5,36 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function AddProduct() {
-  const [title, setTitle] = useState<any>('');
-  const [description, setDescription] = useState<any>('');
+  const [title, setTitle] = useState<any>("");
+  const [description, setDescription] = useState<any>("");
   const [image, setImage] = useState<any>();
-  const [price, setPrice] = useState<any>('');
+  const [price, setPrice] = useState<any>("");
 
   const navigate = useNavigate();
 
-  axios.defaults.withCredentials = true
-
   const onSubmit = async () => {
     try {
-      const imgUrl = await addProduct({ image });
-      await fetch("https://mern-olx-api.vercel.app/product/create", {
-        method: "POST",
-        mode: 'no-cors',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const data = await addProduct({ image });
+      axios
+        .post("https://mern-olx-api.vercel.app/product/create", {
           title,
           description,
           price,
-          image: imgUrl,
-        }),
-      })
-        .then((res) => res.json())
-        .then((res) => console.log(res));
-  
-      toast.success('Product created successfully!');
+          image: data,
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      toast.success("Product created successfully!");
       navigate("/");
     } catch (error) {
       alert(error);
     }
-  }; // Removed the extra bracket after this line
-  
-
-  
+  };
 
   return (
     // <div className="px-10 w-full h-min-screen py-6">
@@ -102,61 +95,60 @@ function AddProduct() {
     // </div>
 
     <div className="px-10 w-full min-h-screen py-6 bg-gray-100 flex justify-center items-center">
-  <div className="bg-white mt-2 px-8 py-6 w-full max-w-lg rounded-lg shadow-lg">
-    <h3 className="font-semibold tracking-wide text-3xl text-blue-600 uppercase text-center">
-      Product Details
-    </h3>
-    <p className="font-medium text-lg tracking-wide mb-8 text-gray-500 text-center">
-      Add product details here
-    </p>
+      <div className="bg-white mt-2 px-8 py-6 w-full max-w-lg rounded-lg shadow-lg">
+        <h3 className="font-semibold tracking-wide text-3xl text-blue-600 uppercase text-center">
+          Product Details
+        </h3>
+        <p className="font-medium text-lg tracking-wide mb-8 text-gray-500 text-center">
+          Add product details here
+        </p>
 
-    <label className="block mb-2 font-medium text-lg text-gray-700">
-      Product Title
-    </label>
-    <input
-      onChange={(e) => setTitle(e.target.value)}
-      className="block mb-6 border-2 border-gray-300 focus:border-blue-500 focus:ring-blue-500 px-4 py-3 w-full rounded-md transition duration-300 ease-in-out"
-      type="text"
-      placeholder="Enter Product Title"
-    />
+        <label className="block mb-2 font-medium text-lg text-gray-700">
+          Product Title
+        </label>
+        <input
+          onChange={(e) => setTitle(e.target.value)}
+          className="block mb-6 border-2 border-gray-300 focus:border-blue-500 focus:ring-blue-500 px-4 py-3 w-full rounded-md transition duration-300 ease-in-out"
+          type="text"
+          placeholder="Enter Product Title"
+        />
 
-    <label className="block mb-2 font-medium text-lg text-gray-700">
-      Product Description
-    </label>
-    <textarea
-      onChange={(e) => setDescription(e.target.value)}
-      className="block mb-6 border-2 border-gray-300 focus:border-blue-500 focus:ring-blue-500 px-4 py-3 w-full h-32 rounded-md resize-none transition duration-300 ease-in-out"
-      placeholder="Enter Product Description"
-    />
+        <label className="block mb-2 font-medium text-lg text-gray-700">
+          Product Description
+        </label>
+        <textarea
+          onChange={(e) => setDescription(e.target.value)}
+          className="block mb-6 border-2 border-gray-300 focus:border-blue-500 focus:ring-blue-500 px-4 py-3 w-full h-32 rounded-md resize-none transition duration-300 ease-in-out"
+          placeholder="Enter Product Description"
+        />
 
-    <label className="block mb-2 font-medium text-lg text-gray-700">
-      Product Image
-    </label>
-    <input
-      onChange={(e) => setImage(e.target!.files![0])}
-      className="block mb-6 text-gray-600 cursor-pointer focus:outline-none"
-      type="file"
-    />
+        <label className="block mb-2 font-medium text-lg text-gray-700">
+          Product Image
+        </label>
+        <input
+          onChange={(e) => setImage(e.target!.files![0])}
+          className="block mb-6 text-gray-600 cursor-pointer focus:outline-none"
+          type="file"
+        />
 
-    <label className="block mb-2 font-medium text-lg text-gray-700">
-      Product Price
-    </label>
-    <input
-      onChange={(e) => setPrice(e.target.value)}
-      className="block mb-10 border-2 border-gray-300 focus:border-blue-500 focus:ring-blue-500 px-4 py-3 w-full rounded-md transition duration-300 ease-in-out"
-      type="number"
-      placeholder="Rs."
-    />
+        <label className="block mb-2 font-medium text-lg text-gray-700">
+          Product Price
+        </label>
+        <input
+          onChange={(e) => setPrice(e.target.value)}
+          className="block mb-10 border-2 border-gray-300 focus:border-blue-500 focus:ring-blue-500 px-4 py-3 w-full rounded-md transition duration-300 ease-in-out"
+          type="number"
+          placeholder="Rs."
+        />
 
-    <button
-      onClick={onSubmit}
-      className="border w-full px-5 py-3 font-medium rounded-md bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white shadow-md transition duration-300 ease-in-out transform hover:scale-105"
-    >
-      Add Product
-    </button>
-  </div>
-</div>
-
+        <button
+          onClick={onSubmit}
+          className="border w-full px-5 py-3 font-medium rounded-md bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+        >
+          Add Product
+        </button>
+      </div>
+    </div>
   );
 }
 
