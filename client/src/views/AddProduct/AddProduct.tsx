@@ -12,6 +12,9 @@ function AddProduct() {
 
   const navigate = useNavigate();
 
+  axios.defaults.withCredentials = true
+
+
   const onSubmit = async () => {
     try {
       // Assuming addProduct returns an object with an image URL
