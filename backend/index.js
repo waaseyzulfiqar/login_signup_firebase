@@ -9,13 +9,7 @@ app.get('/', (req,res)=> {
 })
 
 app.use(express.json())
-app.use(cors(
-    {
-        origin: ['https://mern-olx-frontend.vercel.app'],
-        methods: ["POST", "GET"],
-        credentials: true
-    }
-))
+app.use(cors())
 
 db.connection.once('open', () => {
     console.log('Mongodb Connected Successfully!');
