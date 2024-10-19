@@ -16,12 +16,15 @@ function Dashboard() {
   });
 
   useEffect(() => {
-    axios
-      .get("https://mern-olx-api.vercel.app/product/allProducts")
-      .then((res) => {
-        console.log(res.data);
-        setProduct(res.data);
-      });
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('https://mern-olx-api.vercel.app/product/allProducts');
+        setProduct(response.data);
+      } catch (error) {
+        
+      }
+    };
+    fetchProducts();
   }, []);
 
   const detailPage = (item: any) => {
