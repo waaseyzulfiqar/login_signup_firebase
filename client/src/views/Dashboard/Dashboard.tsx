@@ -15,8 +15,10 @@ function Dashboard() {
     setUser(user);
   });
 
+  axios.defaults.withCredentials = true
+
   useEffect(() => {
-    axios.get("http://localhost:3001/product/allProducts").then((res) => {
+    axios.get("https://mern-olx-api.vercel.app/product/allProducts").then((res) => {
       console.log(res.data);
       setProduct(res.data);
     });

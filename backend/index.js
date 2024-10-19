@@ -9,7 +9,13 @@ app.get('/', (req,res)=> {
 })
 
 app.use(express.json())
-app.use(cors())
+app.use(cors(
+    {
+        origin: [''],
+        methods: ["POST", "GET"],
+        credentials: true
+    }
+))
 
 db.connection.once('open', () => {
     console.log('Mongodb Connected Successfully!');
