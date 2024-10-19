@@ -16,7 +16,7 @@ function AddProduct() {
     try {
       const data = await addProduct({ image }); // image url is returned
   
-      const response = await axios.post(
+      const response = axios.post(
         "https://mern-olx-api.vercel.app/product/create",
         { description, price, title, image: data },
         {
@@ -25,6 +25,7 @@ function AddProduct() {
           },
         }
       )
+      console.log(response);
       toast.success('Product Added Successfully!')
       navigate('/')
     } catch (e: any) {
