@@ -14,31 +14,24 @@ function AddProduct() {
 
   axios.defaults.withCredentials = true
 
-
   const onSubmit = async () => {
     try {
-      // Assuming addProduct returns an object with an image URL
-      const imageUrl = await addProduct({ image });
+      const data = await addProduct({ image }); // image url is returned
   
-      // Validate inputs
-      if (!description || !price || !title || !imageUrl) {
-        throw new Error("All fields are required.");
-      }
-  
-      const response = await axios.post(
+      axios.post(
         "https://mern-olx-api.vercel.app/product/create",
-        { description, price, title, imageUrl },
+        { description, price, title, image: data },
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
-      );
-  
-      toast.success("Product Added Successfully!", response.data);
-      navigate("/");
-    } catch (error:any) {
-      toast.error(error.message);
+      ).then((res) => {
+        toast.success('Product Added Successfully!', res)
+        navigate('/')  
+      })
+    } catch (e: any) {
+      toast.error(e.message);
     }
   };
 

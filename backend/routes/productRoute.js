@@ -17,7 +17,7 @@ router.post('/create', async (req, res) => {
         title: req.body.title,
         description: req.body.description,
         price: req.body.price,
-        imageUrl: req.body.image
+        image: req.body.image
     })
 })
 
