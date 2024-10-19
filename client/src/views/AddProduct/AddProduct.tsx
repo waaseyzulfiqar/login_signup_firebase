@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function AddProduct() {
-  const [title, setTitle] = useState<any>();
-  const [description, setDescription] = useState<any>();
+  const [title, setTitle] = useState<any>('');
+  const [description, setDescription] = useState<any>('');
   const [image, setImage] = useState<any>();
-  const [price, setPrice] = useState<any>();
+  const [price, setPrice] = useState<any>('');
 
   const navigate = useNavigate();
 
@@ -16,24 +16,31 @@ function AddProduct() {
 
   const onSubmit = async () => {
     try {
-      const data = await addProduct({ image }); // image url is returned
-  
-      axios.post(
-        "https://mern-olx-api.vercel.app/product/create",
-        { description, price, title, image: data },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      ).then((res) => {
-        toast.success('Product Added Successfully!', res)
-        navigate('/')  
+      const imgUrl = await addProduct({ image });
+      await fetch("https://mern-olx-api.vercel.app/product/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          description,
+          price,
+          image: imgUrl,
+        }),
       })
-    } catch (e: any) {
-      toast.error(e.message);
+        .then((res) => res.json())
+        .then((res) => console.log(res));
+  
+      toast.success('Product created successfully!');
+      navigate("/");
+    } catch (error) {
+      alert(error);
     }
-  };
+  }; // Removed the extra bracket after this line
+  
+
+  
 
   return (
     // <div className="px-10 w-full h-min-screen py-6">
