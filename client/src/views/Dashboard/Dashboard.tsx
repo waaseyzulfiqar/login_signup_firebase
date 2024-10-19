@@ -22,7 +22,7 @@ function Dashboard() {
       console.log(res.data);
       setProduct(res.data);
     });
-  }, [product]);
+  }, []);
 
   const detailPage = (item: any) => {
     navigate(`/detail/${item._id}`);
