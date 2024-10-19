@@ -12,8 +12,6 @@ function AddProduct() {
 
   const navigate = useNavigate();
 
-  
-
   const onSubmit = async () => {
     try {
       const data = await addProduct({ image }); // image url is returned
