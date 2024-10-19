@@ -16,14 +16,12 @@ function Dashboard() {
   });
 
   useEffect(() => {
-    const data = async () => {
-      await axios.get("https://mern-olx-api.vercel.app/product/allProducts").then((res) => {
+    axios
+      .get("https://mern-olx-api.vercel.app/product/allProducts")
+      .then((res) => {
         console.log(res.data);
         setProduct(res.data);
       });
-    }
-
-    data()
   }, []);
 
   const detailPage = (item: any) => {
@@ -82,60 +80,62 @@ function Dashboard() {
     // </div>
 
     <div className="min-h-screen w-full p-7 md:p-10 bg-gray-100">
-  <div className="flex justify-between items-center mb-6 flex-wrap md:flex-nowrap">
-    <h2 className="text-3xl font-bold text-blue-600 text-center md:text-left">
-      Dashboard
-    </h2>
-    {user && (
-      <p className="font-medium text-gray-700 md:ml-auto lg:mx-auto">User Email: {user?.email}</p>
-    )}
-
-    <div className="space-x-4 mt-4 md:mt-0">
-      <button
-        onClick={() => navigate("/addproduct")}
-        className="px-4 py-2 font-semibold border-2 border-blue-600 hover:bg-blue-600 hover:text-white text-blue-600 transition duration-300 ease-in-out rounded-lg"
-      >
-        Add Product
-      </button>
-      <button
-        onClick={userLoggedOut}
-        className="px-4 py-2 font-semibold border-2 border-red-600 hover:bg-red-600 hover:text-white text-red-600 transition duration-300 ease-in-out rounded-lg"
-      >
-        Logout
-      </button>
-    </div>
-  </div>
-
-  <div className="flex justify-center items-center gap-5 flex-wrap py-6">
-    {product?.map((item: any, index: any) => (
-      <div
-        key={index}
-        onClick={() => detailPage(item)}
-        className="border w-full md:w-[310px] lg:w-[250px] xl:w-[310px] h-[300px] bg-white shadow-lg hover:shadow-xl overflow-hidden transition ease-out duration-300 hover:scale-105 rounded-lg cursor-pointer"
-      >
-        <img
-          className="w-full h-40 object-cover mb-3 mx-auto rounded-md"
-          src={item.image}
-          alt=""
-        />
-        <div className="px-3 py-2">
-          <h3 className="text-lg font-semibold text-gray-700 mb-1">
-            {item.title}
-          </h3>
-          <p className="text-md text-green-500 font-medium mb-2">
-            Rs. {item.price}
+      <div className="flex justify-between items-center mb-6 flex-wrap md:flex-nowrap">
+        <h2 className="text-3xl font-bold text-blue-600 text-center md:text-left">
+          Dashboard
+        </h2>
+        {user && (
+          <p className="font-medium text-gray-700 md:ml-auto lg:mx-auto">
+            User Email: {user?.email}
           </p>
+        )}
+
+        <div className="space-x-4 mt-4 md:mt-0">
           <button
-            onClick={() => detailPage(item)}
-            className="block w-full py-2 text-white bg-blue-500 hover:bg-blue-600 font-semibold rounded-md transition duration-300"
+            onClick={() => navigate("/addproduct")}
+            className="px-4 py-2 font-semibold border-2 border-blue-600 hover:bg-blue-600 hover:text-white text-blue-600 transition duration-300 ease-in-out rounded-lg"
           >
-            View Details
+            Add Product
+          </button>
+          <button
+            onClick={userLoggedOut}
+            className="px-4 py-2 font-semibold border-2 border-red-600 hover:bg-red-600 hover:text-white text-red-600 transition duration-300 ease-in-out rounded-lg"
+          >
+            Logout
           </button>
         </div>
       </div>
-    ))}
-  </div>
-</div>
+
+      <div className="flex justify-center items-center gap-5 flex-wrap py-6">
+        {product?.map((item: any, index: any) => (
+          <div
+            key={index}
+            onClick={() => detailPage(item)}
+            className="border w-full md:w-[310px] lg:w-[250px] xl:w-[310px] h-[300px] bg-white shadow-lg hover:shadow-xl overflow-hidden transition ease-out duration-300 hover:scale-105 rounded-lg cursor-pointer"
+          >
+            <img
+              className="w-full h-40 object-cover mb-3 mx-auto rounded-md"
+              src={item.image}
+              alt=""
+            />
+            <div className="px-3 py-2">
+              <h3 className="text-lg font-semibold text-gray-700 mb-1">
+                {item.title}
+              </h3>
+              <p className="text-md text-green-500 font-medium mb-2">
+                Rs. {item.price}
+              </p>
+              <button
+                onClick={() => detailPage(item)}
+                className="block w-full py-2 text-white bg-blue-500 hover:bg-blue-600 font-semibold rounded-md transition duration-300"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
