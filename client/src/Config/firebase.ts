@@ -39,18 +39,27 @@ export const logout = async () => {
     return signOut(auth);
   };
 
-export const addProduct = async (productInfo: any) => {
-  const {image} = productInfo;
-
-  const storageRef = ref(storage, "products/" + image.name);
-
-  await uploadBytes(storageRef, image);
-
-  const imgUrl = await getDownloadURL(storageRef);
-
-  return imgUrl
-};
-
+  interface ProductInfo {
+    image: File;
+  }
+  
+  export const addProduct = async (productInfo: ProductInfo) => {
+    if (!productInfo || !productInfo.image) {
+      throw new Error("Product info and image are required.");
+    }
+  
+    const { image } = productInfo;
+    const storageRef = ref(storage, "products/" + image.name);
+  
+    try {
+      await uploadBytes(storageRef, image);
+      const imgUrl = await getDownloadURL(storageRef);
+      return imgUrl;
+    } catch (error) {
+      console.error("Error uploading image or retrieving URL:", error);
+      throw error;
+    }
+  };
 
 export const showProductOnDetailPage = async (param: any) => {
   const docRef = doc(db, "products", param);
