@@ -4,6 +4,9 @@ const db = require('./Config/db')
 const router = require('./routes/index')
 const cors = require('cors')
 
+app.get('/', (req,res)=> {
+    res.json('hello')
+})
 
 app.use(express.json())
 app.use(cors())
