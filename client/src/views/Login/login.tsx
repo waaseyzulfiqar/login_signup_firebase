@@ -23,7 +23,7 @@ function Login() {
 
   return (
     <div className="flex justify-center items-center w-full h-screen p-3">
-      <div className="md:w-[500px] sm:w-[400px] w-[700] py-10 bg-slate-200 shadow-md px-8 md:py-16 flex flex-col gap-7 rounded-md">
+      <div className="md:w-[500px] sm:w-[400px] w-full py-10 bg-slate-200 shadow-md px-8 md:py-16 flex flex-col gap-7 rounded-md">
         <h2 className="text-4xl font-semibold text-center">Login</h2>
         <input
           type="Email"
