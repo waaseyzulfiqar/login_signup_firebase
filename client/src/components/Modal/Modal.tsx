@@ -33,7 +33,7 @@ function Modal({ closeModal, data, dispatch }: any) {
             </div>
           </div>
 
-          <div className="flex justify-end items-end">
+          <div className="flex justify-end place-items-end">
             <div className="flex justify-center items-center gap-2">
               {x.quantity === 1 ? (
                 <MdDeleteOutline
