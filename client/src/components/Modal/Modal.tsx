@@ -4,11 +4,11 @@ import { removeFromCart } from "../../store/themeSlice";
 
 function Modal({ closeModal, data, dispatch }: any) {
   return (
-    <div 
+   <div 
   className="h-screen w-full fixed inset-0 flex justify-center items-center bg-slate-200 bg-opacity-100 z-50 overflow-y-auto"
 >
   <div 
-    className="w-full md:w-3/4 lg:w-1/2 xl:w-1/3 max-h-[68vh] px-5 py-5 bg-white shadow-lg rounded overflow-y-auto"
+    className="w-full md:w-full lg:w-3/4 xl:w-1/2 max-h-[68vh] px-5 py-5 bg-white shadow-lg rounded overflow-y-auto md:mx-0"
   >
     {data && data.length > 0 ? (
       data.map((x: any, index: any) => (
@@ -33,8 +33,8 @@ function Modal({ closeModal, data, dispatch }: any) {
             </div>
           </div>
 
-          <div className="flex justify-center place-items-end mt-4 md:mt-0">
-            <div className="flex justify-end items-center gap-2">
+          <div className="flex justify-end items-end">
+            <div className="flex justify-center items-center gap-2">
               {x.quantity === 1 ? (
                 <MdDeleteOutline
                   onClick={() => dispatch(removeFromCart(x.id))}
@@ -47,7 +47,7 @@ function Modal({ closeModal, data, dispatch }: any) {
                 />
               )}
 
-              <p>{x.quantity}</p>
+              <p className="text-lg font-medium">{x.quantity}</p>
 
               {/* <GrAdd onClick={() => dispatch(increment(x.id))} className="border font-bold p-1 text-2xl rounded cursor-pointer" /> */}
             </div>
