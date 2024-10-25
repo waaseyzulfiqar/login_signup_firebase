@@ -34,7 +34,7 @@ function Modal({ closeModal, data, dispatch }: any) {
           </div>
 
           <div className="flex justify-center place-items-end mt-4 md:mt-0">
-            <div className="flex justify-center items-end gap-2">
+            <div className="flex justify-end items-center gap-2">
               {x.quantity === 1 ? (
                 <MdDeleteOutline
                   onClick={() => dispatch(removeFromCart(x.id))}
