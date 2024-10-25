@@ -47,7 +47,7 @@ function Detail() {
       src={handleProduct?.image} 
       alt="" 
     />
-    <div className="w-full md:w-[450px] flex flex-col gap-6 mt-10 md:mt-0">
+    <div className="w-full md:w-[450px] flex flex-col gap-6 mt-10 md:mt-0 px-3">
       <h1 className="text-2xl font-medium">{handleProduct.title}</h1>
       <p>
         Actual Price: <s>$200</s>
